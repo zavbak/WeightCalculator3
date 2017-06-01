@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ru.a799000.android.weightcalculator3.ui.activitys.MainActivity">
+
+
+
+    <TextView
+        android:id="@+id/tvMassage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выберите комманду"
+        android:layout_margin="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/tvMassage">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="16dp"
+            android:layout_below="@+id/tvMassage">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btProdacts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Товары (1)"
+                    android:theme="@style/MyButton"
+                    />
+
+                <Button
+                    android:id="@+id/btLoad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Загрузить (2)"
+                    android:theme="@style/MyButton"
+                    />
+                <Button
+                    android:id="@+id/btSend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Выгрузить (3)"
+                    android:theme="@style/MyButton"
+                    />
+
+                <Button
+                    android:id="@+id/btSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Настройки (4)"
+                    android:theme="@style/MyButton"/>
+
+                <Button
+                    android:id="@+id/btAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="О программе (5)"
+                    android:theme="@style/MyButton"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+</RelativeLayout>
