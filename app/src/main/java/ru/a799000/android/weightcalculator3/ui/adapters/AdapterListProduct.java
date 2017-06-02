@@ -26,6 +26,7 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
         mList = list;
         mCallBackClickItem = CallBackClickItem;
         mList.addChangeListener(this);
+
     }
 
     @Override
@@ -96,9 +97,9 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
             tvEd.setText("1");
-            if(hasFocus){
+            if (hasFocus) {
                 tvEd.setText("1");
-            }else{
+            } else {
                 tvEd.setText("0");
             }
 

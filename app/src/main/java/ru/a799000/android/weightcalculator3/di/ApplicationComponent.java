@@ -6,11 +6,11 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import io.realm.RealmConfiguration;
-import ru.a799000.android.weightcalculator3.mvp.model.interactor.BarcodeInteractor;
-import ru.a799000.android.weightcalculator3.mvp.model.interactor.ProductInteractor;
-import ru.a799000.android.weightcalculator3.mvp.model.interactor.SumBarcodeInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.BarcodeInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.ProductInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.SumBarcodeInteractor;
 import ru.a799000.android.weightcalculator3.mvp.presenters.BarcodeDetailActivityPresenter;
-import ru.a799000.android.weightcalculator3.mvp.presenters.BarcodesActivityPresenter;
+import ru.a799000.android.weightcalculator3.mvp.presenters.ListBarcodeActivityPresenter;
 import ru.a799000.android.weightcalculator3.mvp.presenters.ListProductActivityPresenter;
 import ru.a799000.android.weightcalculator3.mvp.presenters.MainActivityPresenter;
 import ru.a799000.android.weightcalculator3.mvp.presenters.ProdactDetailPresenter;
@@ -41,7 +41,7 @@ public interface ApplicationComponent {
 
     void injectProdactDetailPresenter(ProdactDetailPresenter prodactDetailPresenter);
 
-    void injectBarcodesActivityPresenter(BarcodesActivityPresenter barcodesActivityPresenter);
+    void injectBarcodesActivityPresenter(ListBarcodeActivityPresenter barcodesActivityPresenter);
 
     void injectBarcodeDetailActivityPresenter(BarcodeDetailActivityPresenter barcodeDetailActivityPresenter);
 

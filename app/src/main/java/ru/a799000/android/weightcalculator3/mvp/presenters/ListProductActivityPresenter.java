@@ -7,43 +7,44 @@ import javax.inject.Inject;
 
 import io.realm.RealmResults;
 import ru.a799000.android.weightcalculator3.app.App;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.realm.products.GetAllProductInteracor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.realm.products.SaveProductInteractor;
 import ru.a799000.android.weightcalculator3.mvp.model.intities.Product;
 import ru.a799000.android.weightcalculator3.mvp.view.ListProductActivityView;
 import ru.a799000.android.weightcalculator3.repository.realm.repository.IProductRepository;
+import rx.Subscriber;
 
-/**
- * Created by Alex on 30.05.2017.
- */
+
 
 @InjectViewState
 public class ListProductActivityPresenter extends MvpPresenter<ListProductActivityView> {
-    @Inject
-    IProductRepository mProductRepository;
-
-    RealmResults<Product> mProducts;
 
     public ListProductActivityPresenter() {
         App.getAppComponent().injectListProductActivityPresenter(this);
     }
 
-    public void onStart() {
-        mProductRepository.getAllProduct(new IProductRepository.OnGetAllProductCallback() {
+    private void refreshList(){
+        GetAllProductInteracor interacor = new GetAllProductInteracor();
+        interacor.execute(new Subscriber() {
             @Override
-            public void onSuccess(RealmResults<Product> products) {
-                mProducts = products;
+            public void onCompleted() {
+
             }
 
             @Override
-            public void onError(String message) {
+            public void onError(Throwable e) {
 
+            }
+
+            @Override
+            public void onNext(Object products) {
+                getViewState().refresh((RealmResults<Product>) products);
             }
         });
     }
 
-
-
-    public RealmResults<Product> getProducts() {
-        return mProducts;
+    public void onStart() {
+        refreshList();
     }
 
     public void clickItem(String id) {

@@ -10,7 +10,9 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmResults;
 import ru.a799000.android.weightcalculator3.R;
+import ru.a799000.android.weightcalculator3.mvp.model.intities.Product;
 import ru.a799000.android.weightcalculator3.mvp.presenters.ListProductActivityPresenter;
 import ru.a799000.android.weightcalculator3.mvp.view.ListProductActivityView;
 import ru.a799000.android.weightcalculator3.ui.adapters.AdapterListProduct;
@@ -35,12 +37,16 @@ public class ListProductActivity extends MvpAppCompatActivity implements ListPro
         init();
     }
 
+    void init(){
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
         mPresenter.onStart();
-        mRecyclerView.setAdapter(new AdapterListProduct(mPresenter.getProducts(), id -> mPresenter.clickItem(id)));
     }
+
 
     @Override
     protected void onPause() {
@@ -48,12 +54,14 @@ public class ListProductActivity extends MvpAppCompatActivity implements ListPro
         mPresenter.onStop();
     }
 
-    void init(){
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
 
     @Override
     public void startDetailProductActivityView(String idProdact) {
         startActivity(ProdactDetailActivity.getIntent(this,idProdact));
+    }
+
+    @Override
+    public void refresh(RealmResults<Product> list) {
+        mRecyclerView.setAdapter(new AdapterListProduct(list, id -> mPresenter.clickItem(id)));
     }
 }

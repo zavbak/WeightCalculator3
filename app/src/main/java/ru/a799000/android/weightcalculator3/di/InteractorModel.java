@@ -4,9 +4,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.a799000.android.weightcalculator3.mvp.model.interactor.BarcodeInteractor;
-import ru.a799000.android.weightcalculator3.mvp.model.interactor.ProductInteractor;
-import ru.a799000.android.weightcalculator3.mvp.model.interactor.SumBarcodeInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.BarcodeInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.ProductInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.SumBarcodeInteractor;
 
 
 /**

@@ -1,8 +1,7 @@
-package ru.a799000.android.weightcalculator3.mvp.model.interactor;
+package ru.a799000.android.weightcalculator3.mvp.model.interactors;
 
 import javax.inject.Inject;
 
-import io.realm.RealmResults;
 import ru.a799000.android.weightcalculator3.app.App;
 import ru.a799000.android.weightcalculator3.mvp.model.intities.Product;
 import ru.a799000.android.weightcalculator3.repository.realm.repository.IBarcodeRepository;

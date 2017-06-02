@@ -6,8 +6,8 @@ import com.arellomobile.mvp.MvpPresenter;
 import javax.inject.Inject;
 
 import ru.a799000.android.weightcalculator3.app.App;
-import ru.a799000.android.weightcalculator3.mvp.model.interactor.BarcodeInteractor;
-import ru.a799000.android.weightcalculator3.mvp.model.interactor.ProductInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.BarcodeInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.ProductInteractor;
 import ru.a799000.android.weightcalculator3.mvp.model.intities.Product;
 import ru.a799000.android.weightcalculator3.mvp.view.MainActivityView;
 import ru.a799000.android.weightcalculator3.repository.settings.RepoSettingsI;
@@ -15,7 +15,6 @@ import ru.a799000.android.weightcalculator3.repository.tovarfile.SendProductFile
 import ru.a799000.android.weightcalculator3.repository.tovarfile.intities.load.IntitiesTovarLoad;
 import ru.a799000.android.weightcalculator3.repository.tovarfile.LoadProductFile;
 import rx.Observable;
-import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;

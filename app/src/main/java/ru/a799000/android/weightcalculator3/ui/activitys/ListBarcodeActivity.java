@@ -12,10 +12,12 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import io.realm.RealmList;
+import io.realm.RealmResults;
 import ru.a799000.android.weightcalculator3.R;
-import ru.a799000.android.weightcalculator3.mvp.presenters.BarcodesActivityPresenter;
-import ru.a799000.android.weightcalculator3.mvp.view.BarcodesActivityView;
+import ru.a799000.android.weightcalculator3.mvp.model.intities.Barcode;
+import ru.a799000.android.weightcalculator3.mvp.presenters.ListBarcodeActivityPresenter;
+import ru.a799000.android.weightcalculator3.mvp.view.ListBarcodeActivityView;
 import ru.a799000.android.weightcalculator3.repository.barcode.BarcodeDataBroadcastReceiver;
 import ru.a799000.android.weightcalculator3.ui.adapters.AdapterListBarcodes;
 
@@ -24,12 +26,12 @@ import ru.a799000.android.weightcalculator3.ui.adapters.AdapterListBarcodes;
  * Created by Alex on 23.05.2017.
  */
 
-public class BarcodesActivity extends MvpAppCompatActivity implements BarcodesActivityView {
+public class ListBarcodeActivity extends MvpAppCompatActivity implements ListBarcodeActivityView {
 
     static String ID = "id";
 
     @InjectPresenter
-    BarcodesActivityPresenter mPresenter;
+    ListBarcodeActivityPresenter mPresenter;
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -37,7 +39,7 @@ public class BarcodesActivity extends MvpAppCompatActivity implements BarcodesAc
     BarcodeDataBroadcastReceiver mBarcodeDataBroadcastReceiver;
 
     public static Intent getIntent(final Context context, String id) {
-        Intent intent = new Intent(context, BarcodesActivity.class);
+        Intent intent = new Intent(context, ListBarcodeActivity.class);
         intent.putExtra(ID,id);
         return intent;
     }
@@ -63,6 +65,20 @@ public class BarcodesActivity extends MvpAppCompatActivity implements BarcodesAc
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.onStart();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mPresenter.onStop();
+    }
+
+
+    @Override
     public void registerBarcodeReceiver() {
 
         IntentFilter intentFilter = new IntentFilter("DATA_SCAN");
@@ -74,23 +90,14 @@ public class BarcodesActivity extends MvpAppCompatActivity implements BarcodesAc
         unregisterReceiver(mBarcodeDataBroadcastReceiver);
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mPresenter.onStart();
-        mRecyclerView.setAdapter(new AdapterListBarcodes(mPresenter.getBarcodes(), id -> mPresenter.clickItem(id)));
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mPresenter.onStop();
-    }
-
     @Override
     public void startDetailBarcodeActivityView(String idProduct,String idBarcode,String barcode) {
         startActivity(BarcodeDetailActivity.getIntent(this,idProduct,idBarcode,barcode));
+    }
+
+    @Override
+    public void refresh(RealmResults<Barcode> list) {
+        mRecyclerView.setAdapter(new AdapterListBarcodes(mPresenter.getBarcodes(), id -> mPresenter.clickItem(id)));
     }
 
 

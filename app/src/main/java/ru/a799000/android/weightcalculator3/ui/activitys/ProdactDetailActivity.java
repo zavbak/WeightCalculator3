@@ -112,7 +112,7 @@ public class ProdactDetailActivity extends MvpAppCompatActivity implements Proda
 
     @Override
     public void startBarcodesActivityView(String id) {
-        startActivity(BarcodesActivity.getIntent(this,id));
+        startActivity(ListBarcodeActivity.getIntent(this,id));
     }
 
     @Override

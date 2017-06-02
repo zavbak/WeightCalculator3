@@ -6,12 +6,15 @@ import com.arellomobile.mvp.MvpPresenter;
 import javax.inject.Inject;
 
 import io.realm.RealmList;
+import io.realm.RealmResults;
 import ru.a799000.android.weightcalculator3.app.App;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.realm.barcode.GetAllBarcodeInteracor;
 import ru.a799000.android.weightcalculator3.mvp.model.intities.Barcode;
 import ru.a799000.android.weightcalculator3.mvp.model.intities.Product;
-import ru.a799000.android.weightcalculator3.mvp.view.BarcodesActivityView;
+import ru.a799000.android.weightcalculator3.mvp.view.ListBarcodeActivityView;
 import ru.a799000.android.weightcalculator3.repository.realm.repository.IBarcodeRepository;
 import ru.a799000.android.weightcalculator3.repository.realm.repository.IProductRepository;
+import rx.Subscriber;
 
 
 /**
@@ -19,7 +22,7 @@ import ru.a799000.android.weightcalculator3.repository.realm.repository.IProduct
  */
 
 @InjectViewState
-public class BarcodesActivityPresenter extends MvpPresenter<BarcodesActivityView>{
+public class ListBarcodeActivityPresenter extends MvpPresenter<ListBarcodeActivityView>{
 
     Product mProduct;
     RealmList<Barcode> mBarcodes;
@@ -27,32 +30,55 @@ public class BarcodesActivityPresenter extends MvpPresenter<BarcodesActivityView
     @Inject
     IProductRepository mProductRepository;
 
-    @Inject
-    IBarcodeRepository mBarcodeRepository;
+    //@Inject
+    //IBarcodeRepository mBarcodeRepository;
 
 
 
-    public BarcodesActivityPresenter() {
+    public ListBarcodeActivityPresenter() {
         App.getAppComponent().injectBarcodesActivityPresenter(this);
+    }
+
+
+    private void refreshList(){
+        GetAllBarcodeInteracor interacor = new GetAllBarcodeInteracor(mProduct.getId());
+        interacor.execute(new Subscriber() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+                getViewState().refresh((RealmResults<Barcode>) o);
+            }
+        });
+
     }
 
 
     public void onStart() {
 
-        if(mProduct.getId() != 0) {
-           mBarcodeRepository.getAllBarcodesByProductId(mProduct.getId(), new IBarcodeRepository.OnGetBarcodesCallback() {
-               @Override
-               public void onSuccess(RealmList<Barcode> barcodes) {
-                   mBarcodes = barcodes;
-               }
+//        if(mProduct.getId() != 0) {
+//           mBarcodeRepository.getAllBarcodesByProductId(mProduct.getId(), new IBarcodeRepository.OnGetBarcodesCallback() {
+//               @Override
+//               public void onSuccess(RealmList<Barcode> barcodes) {
+//                   mBarcodes = barcodes;
+//               }
+//
+//               @Override
+//               public void onError(String message) {
+//
+//               }
+//           });
+//        }
 
-               @Override
-               public void onError(String message) {
-
-               }
-           });
-        }
-
+        refreshList();
         getViewState().registerBarcodeReceiver();
     }
 

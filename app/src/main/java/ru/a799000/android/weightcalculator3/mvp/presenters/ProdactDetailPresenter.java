@@ -12,9 +12,9 @@ import javax.inject.Inject;
 
 import ru.a799000.android.weightcalculator3.app.App;
 
-import ru.a799000.android.weightcalculator3.mvp.model.interactor.ProductInteractor;
-import ru.a799000.android.weightcalculator3.mvp.model.interactor.BarcodeSeporatorIterator;
-import ru.a799000.android.weightcalculator3.mvp.model.interactor.SumBarcodeInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.ProductInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.BarcodeSeporatorIterator;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.SumBarcodeInteractor;
 import ru.a799000.android.weightcalculator3.mvp.model.intities.Product;
 import ru.a799000.android.weightcalculator3.mvp.view.ProdactDetailView;
 

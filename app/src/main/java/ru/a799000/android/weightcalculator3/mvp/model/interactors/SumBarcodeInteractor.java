@@ -1,4 +1,4 @@
-package ru.a799000.android.weightcalculator3.mvp.model.interactor;
+package ru.a799000.android.weightcalculator3.mvp.model.interactors;
 
 import java.math.BigDecimal;
 
