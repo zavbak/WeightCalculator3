@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.text.Editable;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -13,6 +16,9 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnFocusChange;
+import butterknife.OnTextChanged;
+import butterknife.OnTouch;
 import ru.a799000.android.weightcalculator3.R;
 import ru.a799000.android.weightcalculator3.mvp.presenters.ProdactDetailPresenter;
 import ru.a799000.android.weightcalculator3.mvp.view.ProdactDetailView;
@@ -151,7 +157,12 @@ public class ProdactDetailActivity extends MvpAppCompatActivity implements Proda
         mPresenter.onClickBarcodes();
     }
 
-
+    @OnFocusChange({R.id.edStart,R.id.edFinish,R.id.edCof})
+    void onFocusChange(View v, boolean hasFocus) {
+        if(hasFocus){
+            ((EditText)v).selectAll();
+        };
+    }
 
 
 }

@@ -1,8 +1,10 @@
 package ru.a799000.android.weightcalculator3.mvp.model.interactors.realm.products;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmModel;
 import ru.a799000.android.weightcalculator3.mvp.model.interactors.realm.BaseInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.intities.Barcode;
 import ru.a799000.android.weightcalculator3.mvp.model.intities.Product;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -39,16 +41,24 @@ public class SaveProductInteractor extends BaseInteractor {
 
     @Override
     protected Observable<Product> getObservable() {
-
-
         try {
             realm.beginTransaction();
             if (mProduct.getId() == 0) {
                 mProduct.setId(getNextId(Product.class));
             }
-            Product realmProduct = realm.copyToRealmOrUpdate(mProduct);
-            realm.commitTransaction();
+            Product realmProduct = realm.where(Product.class).equalTo("id", mProduct.getId()).findFirst();
 
+            if(realmProduct == null){
+                realmProduct = realm.copyToRealmOrUpdate(mProduct);
+            }else{
+                realmProduct.setName(mProduct.getName());
+                realmProduct.setCode(mProduct.getCode());
+                realmProduct.setStart(mProduct.getStart());
+                realmProduct.setFinish(mProduct.getFinish());
+                realmProduct.setCoef(mProduct.getCoef());
+                realmProduct.setEd(mProduct.getEd());
+            }
+            realm.commitTransaction();
             return Observable.just(realmProduct);
         } catch (Exception e) {
             e.printStackTrace();

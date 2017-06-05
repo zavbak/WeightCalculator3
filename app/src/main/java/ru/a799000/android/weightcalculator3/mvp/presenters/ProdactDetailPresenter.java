@@ -15,8 +15,10 @@ import ru.a799000.android.weightcalculator3.app.App;
 import ru.a799000.android.weightcalculator3.mvp.model.interactors.ProductInteractor;
 import ru.a799000.android.weightcalculator3.mvp.model.interactors.BarcodeSeporatorIterator;
 import ru.a799000.android.weightcalculator3.mvp.model.interactors.SumBarcodeInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.realm.products.SaveProductInteractor;
 import ru.a799000.android.weightcalculator3.mvp.model.intities.Product;
 import ru.a799000.android.weightcalculator3.mvp.view.ProdactDetailView;
+import rx.Subscriber;
 
 
 /**
@@ -111,7 +113,30 @@ public class ProdactDetailPresenter extends MvpPresenter<ProdactDetailView> {
         mProduct.setFinish(Integer.parseInt(finish));
         mProduct.setCoef(Float.parseFloat(coef));
 
-        mProductInteractor.saveProduct(mProduct);
+
+        SaveProductInteractor interactor = new SaveProductInteractor(mProduct);
+        interactor.execute(new Subscriber() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+
+            }
+        });
+        // /mProductInteractor.saveProduct(mProduct);
+
+
+
+
+
 
         getViewState().finishView();
 

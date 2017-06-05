@@ -102,4 +102,6 @@ public class BarcodeDetailActivity extends MvpAppCompatActivity implements Barco
 
 
 
+
+
 }
