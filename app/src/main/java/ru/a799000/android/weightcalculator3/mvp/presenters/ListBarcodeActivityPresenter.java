@@ -55,7 +55,7 @@ public class ListBarcodeActivityPresenter extends MvpPresenter<ListBarcodeActivi
 
             @Override
             public void onNext(Object o) {
-                getViewState().refresh((RealmResults<Barcode>) o);
+                getViewState().refresh((RealmList<Barcode>) o);
             }
         });
 

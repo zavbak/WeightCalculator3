@@ -25,5 +25,5 @@ public interface ListBarcodeActivityView extends MvpView {
     void unregisterReceiver();
 
     @StateStrategyType(OneExecutionStateStrategy.class)
-    void refresh(RealmResults<Barcode> list);
+    void refresh(RealmList<Barcode> list);
 }

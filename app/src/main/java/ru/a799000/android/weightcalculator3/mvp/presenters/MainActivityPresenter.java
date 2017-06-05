@@ -8,6 +8,9 @@ import javax.inject.Inject;
 import ru.a799000.android.weightcalculator3.app.App;
 import ru.a799000.android.weightcalculator3.mvp.model.interactors.BarcodeInteractor;
 import ru.a799000.android.weightcalculator3.mvp.model.interactors.ProductInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.realm.barcode.DellAllBarcodeInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.realm.barcode.DellBarcodeInteractor;
+import ru.a799000.android.weightcalculator3.mvp.model.interactors.realm.products.DellAllProductInteracor;
 import ru.a799000.android.weightcalculator3.mvp.model.intities.Product;
 import ru.a799000.android.weightcalculator3.mvp.view.MainActivityView;
 import ru.a799000.android.weightcalculator3.repository.settings.RepoSettingsI;
@@ -15,6 +18,7 @@ import ru.a799000.android.weightcalculator3.repository.tovarfile.SendProductFile
 import ru.a799000.android.weightcalculator3.repository.tovarfile.intities.load.IntitiesTovarLoad;
 import ru.a799000.android.weightcalculator3.repository.tovarfile.LoadProductFile;
 import rx.Observable;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -47,8 +51,44 @@ public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
 
     public void Load() {
 
+        DellAllProductInteracor dellAllProductInteracor = new DellAllProductInteracor();
+        dellAllProductInteracor.execute(new Subscriber() {
+            @Override
+            public void onCompleted() {
 
-        mProductInteractor.dellAllProduct();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+
+            }
+        });
+
+
+        DellAllBarcodeInteractor interactor = new DellAllBarcodeInteractor();
+        interactor.execute(new Subscriber() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+
+            }
+        });
+
+        //mProductInteractor.dellAllProduct();
 
         LoadProductFile loadProductFile = new LoadProductFile();
         Observable<IntitiesTovarLoad> stringObservable = loadProductFile.readStringObservable(mRepoSettings.getSettings().mName);

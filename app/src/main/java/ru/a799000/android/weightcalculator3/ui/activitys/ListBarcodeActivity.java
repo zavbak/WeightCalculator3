@@ -96,8 +96,8 @@ public class ListBarcodeActivity extends MvpAppCompatActivity implements ListBar
     }
 
     @Override
-    public void refresh(RealmResults<Barcode> list) {
-        mRecyclerView.setAdapter(new AdapterListBarcodes(mPresenter.getBarcodes(), id -> mPresenter.clickItem(id)));
+    public void refresh(RealmList<Barcode> list) {
+        mRecyclerView.setAdapter(new AdapterListBarcodes(list, id -> mPresenter.clickItem(id)));
     }
 
 

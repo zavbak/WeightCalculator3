@@ -31,10 +31,10 @@ public class GetAllBarcodeInteracor extends BaseInteractor {
         try {
 
             if (mIdProd != 0) {
-                //Product product = realm.where(Product.class).equalTo("id", mIdProd).findFirst();
+                Product product = realm.where(Product.class).equalTo("id", mIdProd).findFirst();
 
-                RealmResults<Barcode> results = realm.where(Barcode.class).equalTo("product.id", mIdProd).findAll();
-                return Observable.just(results);
+                //RealmResults<Barcode> results = realm.where(Barcode.class).equalTo("product.id", mIdProd).findAll();
+                return Observable.just(product.getBarcodes());
             } else {
                 RealmQuery<Barcode> query = realm.where(Barcode.class);
                 RealmResults<Barcode> results = query.findAll();
